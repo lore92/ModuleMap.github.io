@@ -3,10 +3,7 @@ console.log("plot");
 var LevelReNumberCount = 0;
 var LevelNoreNumberCount = 0;
 var PreviousLevel = 0;
-<<<<<<< HEAD
-=======
 var LevelNumber = 1;
->>>>>>> master
 
 //Load the data about Module;
 function ModuleDataLoad()
@@ -24,14 +21,10 @@ function dataLoaded(err,module,Level)
 {	
 	var LevelInfo = Level;
 	console.log(LevelInfo);
-<<<<<<< HEAD
-	var KeyPass = 0;
-=======
 	var KeyBluePass = 0;
 	var KeyGreenPass = 0;
 	var BlueNumber = 0;
 	var GreenNumber = 0;
->>>>>>> master
 	var PreviousSelectLevel = 0;
 	var PreviousName = null;
 	
@@ -85,28 +78,18 @@ function dataLoaded(err,module,Level)
 		.attr("value",function(d){
 			return +d.Level;
 		})
-<<<<<<< HEAD
-=======
 		.attr("Required",function(d){
 			return d.Required;
 		})	
->>>>>>> master
 		.style("width",buttonWidth + "px")
 		.style("height",buttonHeight + "px")
 		.style("position","absolute")
 		.style("margin-top",function(d){
-<<<<<<< HEAD
-			if(d.Required == "TRUE")
-				{
-					if(PreviousLevel!=d.Level)
-						{
-=======
 			if(d.Required == "TRUE")//Required is the attribution which will discribe if this module is elective or obligatory, obligatory means the true, and elective means the faluse
 				{
 					if(PreviousLevel!=d.Level)//Obligatory and the elective will draw in totally different way
 						{
 							LevelNoreNumberCount = 0;
->>>>>>> master
 							LevelReNumberCount = 0;
 							PreviousLevel = d.Level;
 							var WidthBlankValue = (h*lowpercentage - LevelReNumberCount*buttonHeight)
@@ -124,10 +107,7 @@ function dataLoaded(err,module,Level)
 				{
 					if(PreviousLevel!=d.Level)
 						{
-<<<<<<< HEAD
-=======
 							LevelReNumberCount = 0;
->>>>>>> master
 							LevelNoreNumberCount = 0;
 							PreviousLevel = d.Level
 							var HeightBlankValue = (h*lowpercentage + (LevelNoreNumberCount+1)*buttonHeight)
@@ -136,11 +116,7 @@ function dataLoaded(err,module,Level)
 						}
 					else
 						{
-<<<<<<< HEAD
-							var HeightBlankValue = (h*lowpercentage + (LevelNoreNumberCount+1)*buttonHeight + HeightBlank * LevelNoreNumberCount);
-=======
 							var HeightBlankValue = (h*lowpercentage + (LevelNoreNumberCount+1)*buttonHeight + HeightBlank * (LevelNoreNumberCount+1));
->>>>>>> master
 							LevelNoreNumberCount = LevelNoreNumberCount + 1;
 							return  HeightBlankValue + "px";							
 						}
@@ -154,16 +130,6 @@ function dataLoaded(err,module,Level)
 				{
 					if(d.Level==LevelInfo[i].Level)
 						{
-<<<<<<< HEAD
-							if(LevelInfo[i].ReNumber <= KeyPass)
-								{
-									return null;
-								}
-							else
-								{
-									return "disabled";
-								}
-=======
 							if(d.Required == "TRUE")
 								{
 									if(LevelInfo[i].ReBlueNumber <= KeyBluePass)
@@ -186,7 +152,6 @@ function dataLoaded(err,module,Level)
 											return "disabled";//If the module can not be select at first, like need some pre request module or skills, or something other, than, that module will be disabled
 										}	
 								}							
->>>>>>> master
 						}
 				}
 			return null;
@@ -194,11 +159,7 @@ function dataLoaded(err,module,Level)
 		.style("opacity",function(d){
 			if(this.disabled)
 				{
-<<<<<<< HEAD
-					return 0.1;
-=======
 					return 0.2;
->>>>>>> master
 				}
 			else
 				{
@@ -230,44 +191,6 @@ function dataLoaded(err,module,Level)
 			});
 			PreviousName = d.Name;			
 		})
-<<<<<<< HEAD
-		.on("mouseover",function(){
-			console.log(LevelInfo[this.value-1]);
-			var ToolTip = d3.select("#Tooltip")
-//			console.log(this);
-			
-			ToolTip = d3.select("#Tooltip")
-			.style("margin-left",function(){
-				var coordinates = [200, 50];
-				coordinates = d3.mouse(this);
-				var x = coordinates[0];				
-//				return x+buttonWidth/2 + "px";
-				return  0 + "px";
-			})
-			.style("margin-top",function(){
-				var coordinates = [0, 0];
-				coordinates = d3.mouse(this);
-				var y = coordinates[1];				
-//				return y - buttonHeight/2 + "px";
-				return 0 + "px";
-			})
-			.transition()
-			.duration(500)
-			.style("opacity",0.8)		
-			
-			var TipString;
-			if(LevelInfo[this.value-1].ReNumber==0)
-				{
-					TipString = "You need to submit" + (LevelInfo[this.value-1].ReNumber+1 - KeyPass) + ",more module,to unlock,the next one";
-				}
-			else
-				{
-					TipString = "You need to submit" + (LevelInfo[this.value-1].ReNumber-KeyPass) + ",more module,to unlock,the next one";
-				}
-			
-			
-			//Text Part;
-=======
 		.on("mouseover",function(){			
 			console.log(document.getElementById(this.id).getAttribute('required'));
 			
@@ -350,16 +273,11 @@ function dataLoaded(err,module,Level)
 						}	
 				}
 			
->>>>>>> master
 			var text = d3.select("#Tooltip")
 			.append("text")
 			.attr("x",15)
 			.attr("y",25)
-<<<<<<< HEAD
-			.style("font-size",18+"px")
-=======
 			.style("font-size",12+"px")
->>>>>>> master
 //			.text(TipString);
 			
 			var NewString = TipString.split(",");
@@ -374,19 +292,6 @@ function dataLoaded(err,module,Level)
 				return d;
 			});
 			
-<<<<<<< HEAD
-			console.log(ToolTip);			
-		})
-		.on("mouseout",function(){
-			var Hide = d3.select("#Tooltip")	
-			.transition()
-			.duration(500)
-			.style("opacity",0)
-			
-			var HideText = d3.selectAll("text")
-			.text("");			
-
-=======
 			console.log(ToolTip);	
 		})
 		.on("mouseout",function(){
@@ -424,14 +329,11 @@ function dataLoaded(err,module,Level)
 			.style("opacity",0.8)
 			.style("margin-left",0+"px")
 			.style("margin-top",0+"px")			
->>>>>>> master
 		})
 	
 	console.log(DrawButton[0][0].__data__);
 	console.log(DrawButton);
 	
-<<<<<<< HEAD
-=======
 	var ReloadButton = d3.select('#plot')
 		.append("button")
 		.attr("class","btn btn-warning")
@@ -449,7 +351,6 @@ function dataLoaded(err,module,Level)
 			window.location.reload();
 		});		
 	
->>>>>>> master
 	var SubmitButton = d3.select('#plot')
 		.append("button")
 		.attr("class","btn btn-warning")
@@ -470,10 +371,6 @@ function dataLoaded(err,module,Level)
 			.attr("selected",function(){
 				if(document.getElementById(PreviousName).getAttribute("selected")==0)
 					{
-<<<<<<< HEAD
-						KeyPass = KeyPass + 1;
-						return 1;
-=======
 						if(document.getElementById(PreviousName).getAttribute("Required") == "TRUE")
 							{
 								KeyBluePass = KeyBluePass + 1;
@@ -484,7 +381,6 @@ function dataLoaded(err,module,Level)
 								KeyGreenPass = KeyGreenPass + 1;
 								return 1;	
 							}
->>>>>>> master
 					}
 				else
 					{
@@ -493,60 +389,6 @@ function dataLoaded(err,module,Level)
 			})
 			.style("opacity",1)
 			
-<<<<<<< HEAD
-			console.log(KeyPass);
-			
-			if(PreviousSelectLevel>0)
-				{
-					if(LevelInfo[PreviousSelectLevel-1].ReNumber <= KeyPass)
-					{
-						var NameString = ".btn.btn-info"+'.'+(PreviousSelectLevel+1).toString();
-						$(NameString)
-						.attr("disabled",null);
-						
-						var NameAString = ".btn.btn-success"+'.'+(PreviousSelectLevel+1).toString();
-						$(NameAString)
-						.attr("disabled",null);
-						
-						d3.selectAll('.btn')
-						.style("opacity",function(d){
-							console.log(this.getAttribute("selected"));
-								if(this.getAttribute("selected") == 1)
-									{
-										return 1;
-									}
-								else if(this.disabled)
-									{
-										return 0.2;
-									}
-								else if(!this.disabled)
-									{
-										return 0.5;
-									}
-						})
-						
-						KeyPass = 0;
-					}
-				}
-		});
-	
-	var ReloadButton = d3.select('#plot')
-		.append("button")
-		.attr("class","btn btn-warning")
-		.attr("type","button")
-		.attr("value","Change Source")
-		.attr("selected",1)
-		.style("width",SubmitButtonWidth + "px")
-		.style("height",SubmitButtonHeight + "px")
-		.style("margin-left",88 + "%")
-		.style("padding-left",1.5+"px")
-		.style("position","absolute")
-		.text("Restart")
-		.style("font-size",14 + "px")
-		.on("click",function(){
-			window.location.reload();
-		});	
-=======
 			console.log(KeyBluePass);
 			console.log(KeyGreenPass);
 			
@@ -593,7 +435,6 @@ function dataLoaded(err,module,Level)
 						}
 				}
 		});
->>>>>>> master
 }
 
 function changeModule(ModuleAddress)
@@ -620,12 +461,8 @@ function parseLevle(d)
 	var ModuleLevel = {}			
 
 	ModuleLevel.Level = +d.Level;
-<<<<<<< HEAD
-	ModuleLevel.ReNumber = +d.RequiredNo;
-=======
 	ModuleLevel.ReBlueNumber = +d.BlueRequiredNo;
 	ModuleLevel.ReGreenNumber = +d.GreenRequiredNo;
->>>>>>> master
 	ModuleLevel.Des = d.Description;
 			
 	return ModuleLevel;
