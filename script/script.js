@@ -32,7 +32,11 @@ plot.append('g')
     .append('path')
     .datum({
         startAngle:0,
+<<<<<<< HEAD
         endAngle:Math.PI*1
+=======
+        endAngle:Math.PI*2
+>>>>>>> master
     })
     .attr('d',arcGenerator);
 

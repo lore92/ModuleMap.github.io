@@ -3,6 +3,10 @@ console.log("plot");
 var LevelReNumberCount = 0;
 var LevelNoreNumberCount = 0;
 var PreviousLevel = 0;
+<<<<<<< HEAD
+=======
+var LevelNumber = 1;
+>>>>>>> master
 
 //Load the data about Module;
 function ModuleDataLoad()
@@ -20,7 +24,14 @@ function dataLoaded(err,module,Level)
 {	
 	var LevelInfo = Level;
 	console.log(LevelInfo);
+<<<<<<< HEAD
 	var KeyPass = 0;
+=======
+	var KeyBluePass = 0;
+	var KeyGreenPass = 0;
+	var BlueNumber = 0;
+	var GreenNumber = 0;
+>>>>>>> master
 	var PreviousSelectLevel = 0;
 	var PreviousName = null;
 	
@@ -74,14 +85,28 @@ function dataLoaded(err,module,Level)
 		.attr("value",function(d){
 			return +d.Level;
 		})
+<<<<<<< HEAD
+=======
+		.attr("Required",function(d){
+			return d.Required;
+		})	
+>>>>>>> master
 		.style("width",buttonWidth + "px")
 		.style("height",buttonHeight + "px")
 		.style("position","absolute")
 		.style("margin-top",function(d){
+<<<<<<< HEAD
 			if(d.Required == "TRUE")
 				{
 					if(PreviousLevel!=d.Level)
 						{
+=======
+			if(d.Required == "TRUE")//Required is the attribution which will discribe if this module is elective or obligatory, obligatory means the true, and elective means the faluse
+				{
+					if(PreviousLevel!=d.Level)//Obligatory and the elective will draw in totally different way
+						{
+							LevelNoreNumberCount = 0;
+>>>>>>> master
 							LevelReNumberCount = 0;
 							PreviousLevel = d.Level;
 							var WidthBlankValue = (h*lowpercentage - LevelReNumberCount*buttonHeight)
@@ -99,6 +124,10 @@ function dataLoaded(err,module,Level)
 				{
 					if(PreviousLevel!=d.Level)
 						{
+<<<<<<< HEAD
+=======
+							LevelReNumberCount = 0;
+>>>>>>> master
 							LevelNoreNumberCount = 0;
 							PreviousLevel = d.Level
 							var HeightBlankValue = (h*lowpercentage + (LevelNoreNumberCount+1)*buttonHeight)
@@ -107,7 +136,11 @@ function dataLoaded(err,module,Level)
 						}
 					else
 						{
+<<<<<<< HEAD
 							var HeightBlankValue = (h*lowpercentage + (LevelNoreNumberCount+1)*buttonHeight + HeightBlank * LevelNoreNumberCount);
+=======
+							var HeightBlankValue = (h*lowpercentage + (LevelNoreNumberCount+1)*buttonHeight + HeightBlank * (LevelNoreNumberCount+1));
+>>>>>>> master
 							LevelNoreNumberCount = LevelNoreNumberCount + 1;
 							return  HeightBlankValue + "px";							
 						}
@@ -121,6 +154,7 @@ function dataLoaded(err,module,Level)
 				{
 					if(d.Level==LevelInfo[i].Level)
 						{
+<<<<<<< HEAD
 							if(LevelInfo[i].ReNumber <= KeyPass)
 								{
 									return null;
@@ -129,6 +163,30 @@ function dataLoaded(err,module,Level)
 								{
 									return "disabled";
 								}
+=======
+							if(d.Required == "TRUE")
+								{
+									if(LevelInfo[i].ReBlueNumber <= KeyBluePass)
+										{
+											return null;
+										}
+									else
+										{
+											return "disabled";//If the module can not be select at first, like need some pre request module or skills, or something other, than, that module will be disabled
+										}	
+								}
+							else
+								{
+									if(LevelInfo[i].ReGreenNumber <= KeyGreenPass)
+										{
+											return null;
+										}
+									else
+										{
+											return "disabled";//If the module can not be select at first, like need some pre request module or skills, or something other, than, that module will be disabled
+										}	
+								}							
+>>>>>>> master
 						}
 				}
 			return null;
@@ -136,7 +194,11 @@ function dataLoaded(err,module,Level)
 		.style("opacity",function(d){
 			if(this.disabled)
 				{
+<<<<<<< HEAD
 					return 0.1;
+=======
+					return 0.2;
+>>>>>>> master
 				}
 			else
 				{
@@ -168,6 +230,7 @@ function dataLoaded(err,module,Level)
 			});
 			PreviousName = d.Name;			
 		})
+<<<<<<< HEAD
 		.on("mouseover",function(){
 			console.log(LevelInfo[this.value-1]);
 			var ToolTip = d3.select("#Tooltip")
@@ -204,11 +267,99 @@ function dataLoaded(err,module,Level)
 			
 			
 			//Text Part;
+=======
+		.on("mouseover",function(){			
+			console.log(document.getElementById(this.id).getAttribute('required'));
+			
+// Describe the Tooltip part------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+			var ToolTip = d3.select("#Tooltip")
+//			console.log(this);
+			var LeftPosition = this.style.marginLeft.toString();
+			var TopPosition = this.style.marginTop.toString();
+			var pattern = "px";
+			
+			LeftPosition = LeftPosition.replace(new RegExp(pattern),"");
+			TopPosition = TopPosition.replace(new RegExp(pattern),"");
+			
+			ToolTip = d3.select("#Tooltip")
+			.transition()
+			.duration(500)			
+			.style("margin-left",function(){
+//				var coordinates = [0, 0];
+//				coordinates = d3.mouse(this);
+//				var x = coordinates[0];				
+//				return x+buttonWidth/2 + "px";
+				var RightLeftPosition = +LeftPosition;
+				console.log(RightLeftPosition);
+				return  RightLeftPosition + buttonWidth + "px" ;
+			})
+			.style("margin-top",function(){
+//				var coordinates = [0, 0];
+//				coordinates = d3.mouse(this);
+//				var y = coordinates[1];				
+//				return y - buttonHeight/2 + "px";
+				var RightTopPosition = +TopPosition;
+				return RightTopPosition  + "px" ;				
+			})
+			.style("opacity",0.8)
+			
+			var HideText = d3.selectAll("text")
+			.text("");
+			
+			var TipString;
+			if(document.getElementById(this.id).getAttribute('required') == "TRUE")
+				{
+					if(LevelInfo[this.value-1].ReBlueNumber==0)
+						{
+							BlueNumber = (LevelInfo[this.value-1].ReBlueNumber+1 - KeyBluePass);
+							if(BlueNumber<=0)
+								{
+									BlueNumber = 0;
+								}
+							TipString = "Need submit " +  BlueNumber + ",more Blue module,in Level " + (LevelNumber) + ",to unlock,the next Level";
+						}
+					else
+						{
+							BlueNumber = (LevelInfo[this.value-1].ReBlueNumber-KeyBluePass);
+							if(BlueNumber<=0)
+								{
+									BlueNumber = 0;
+								}
+							TipString = "Need submit " + BlueNumber + ",more Blue module,in Level " + (LevelNumber) + ",to unlock,the next Level";
+						}					
+				}
+			else
+				{
+					if(LevelInfo[this.value-1].ReGreenNumber==0)
+						{
+							GreenNumber = (LevelInfo[this.value-1].ReGreenNumber+1 - KeyGreenPass);
+							if(GreenNumber<=0)
+								{
+									GreenNumber = 0;
+								}
+							TipString = "Need submit at least" + GreenNumber + ",more Green module,in Level " + (LevelNumber) + ",to unlock,the next Level";
+						}
+					else
+						{
+							GreenNumber = (LevelInfo[this.value-1].ReGreenNumber-KeyGreenPass);
+							if(GreenNumber<=0)
+								{
+									GreenNumber = 0;
+								}							
+							TipString = "Need submit at least" + GreenNumber + ",more Green module,to unlock,in Level " + (LevelNumber) + ",to unlock,the next Level";
+						}	
+				}
+			
+>>>>>>> master
 			var text = d3.select("#Tooltip")
 			.append("text")
 			.attr("x",15)
 			.attr("y",25)
+<<<<<<< HEAD
 			.style("font-size",18+"px")
+=======
+			.style("font-size",12+"px")
+>>>>>>> master
 //			.text(TipString);
 			
 			var NewString = TipString.split(",");
@@ -223,6 +374,7 @@ function dataLoaded(err,module,Level)
 				return d;
 			});
 			
+<<<<<<< HEAD
 			console.log(ToolTip);			
 		})
 		.on("mouseout",function(){
@@ -234,11 +386,70 @@ function dataLoaded(err,module,Level)
 			var HideText = d3.selectAll("text")
 			.text("");			
 
+=======
+			console.log(ToolTip);	
+		})
+		.on("mouseout",function(){
+
+			var TipStringII = "Need submit " +  BlueNumber + ",more Blue module" + ",and need submit " + GreenNumber + ",more Green module,in Level "+ (LevelNumber) + ",to unlock,the next Level";
+			var NewString = TipStringII.split(",");
+			
+//			var Hide = d3.select("#Tooltip")
+//			.transition()
+//			.duration(500)
+//			.style("opacity",0)
+			
+			var HideText = d3.selectAll("text")
+			.text("");
+			
+			var Showagain = d3.select('#Tooltip')
+			.append("text")
+			.attr("x",15)
+			.attr("y",25)
+			.style("font-size",12+"px")
+			
+			Showagain.selectAll("tspan")
+			.data(NewString)
+			.enter()
+			.append("tspan")
+			.attr("x",15)
+			.attr("dy","1em")
+			.text(function(d){
+				return d;
+			});
+			
+			var ChangePosition = d3.select('#Tooltip')
+			.transition()
+			.duration(500)
+			.style("opacity",0.8)
+			.style("margin-left",0+"px")
+			.style("margin-top",0+"px")			
+>>>>>>> master
 		})
 	
 	console.log(DrawButton[0][0].__data__);
 	console.log(DrawButton);
 	
+<<<<<<< HEAD
+=======
+	var ReloadButton = d3.select('#plot')
+		.append("button")
+		.attr("class","btn btn-warning")
+		.attr("type","button")
+		.attr("value","Change Source")
+		.attr("selected",1)
+		.style("width",SubmitButtonWidth + "px")
+		.style("height",SubmitButtonHeight + "px")
+		.style("margin-left",88 + "%")
+		.style("padding-left",1.5+"px")
+		.style("position","absolute")
+		.text("Restart")
+		.style("font-size",14 + "px")
+		.on("click",function(){
+			window.location.reload();
+		});		
+	
+>>>>>>> master
 	var SubmitButton = d3.select('#plot')
 		.append("button")
 		.attr("class","btn btn-warning")
@@ -259,8 +470,21 @@ function dataLoaded(err,module,Level)
 			.attr("selected",function(){
 				if(document.getElementById(PreviousName).getAttribute("selected")==0)
 					{
+<<<<<<< HEAD
 						KeyPass = KeyPass + 1;
 						return 1;
+=======
+						if(document.getElementById(PreviousName).getAttribute("Required") == "TRUE")
+							{
+								KeyBluePass = KeyBluePass + 1;
+								return 1;	
+							}
+						else
+							{
+								KeyGreenPass = KeyGreenPass + 1;
+								return 1;	
+							}
+>>>>>>> master
 					}
 				else
 					{
@@ -269,6 +493,7 @@ function dataLoaded(err,module,Level)
 			})
 			.style("opacity",1)
 			
+<<<<<<< HEAD
 			console.log(KeyPass);
 			
 			if(PreviousSelectLevel>0)
@@ -321,6 +546,54 @@ function dataLoaded(err,module,Level)
 		.on("click",function(){
 			window.location.reload();
 		});	
+=======
+			console.log(KeyBluePass);
+			console.log(KeyGreenPass);
+			
+			if(PreviousSelectLevel>0)
+				{
+					if(LevelInfo[PreviousSelectLevel-1].ReBlueNumber <= KeyBluePass)
+						{
+							if(LevelInfo[PreviousSelectLevel-1].ReGreenNumber <= KeyGreenPass)
+								{
+										var NameString = ".btn.btn-info"+'.'+(PreviousSelectLevel+1).toString();
+											$(NameString)
+											.attr("disabled",null);
+
+											var NameAString = ".btn.btn-success"+'.'+(PreviousSelectLevel+1).toString();
+											$(NameAString)
+											.attr("disabled",null);
+
+											d3.selectAll('.btn')
+											.style("opacity",function(d){
+												console.log(this.getAttribute("selected"));
+													if(this.getAttribute("selected") == 1)
+														{
+															return 1;
+														}
+													else if(this.disabled)
+														{
+															return 0.2;
+														}
+													else if(!this.disabled)
+														{
+															return 0.5;
+														}
+														})
+
+										KeyBluePass = 0;
+										KeyGreenPass = 0;
+										LevelNumber = LevelNumber + 1;
+									
+										if((PreviousSelectLevel+1)>7)
+										   {
+											   window.location.href = "https://docs.google.com/forms/d/1PKCxIjLPtBtsXLbYSDMN_nCFz8gjZdh5Uv5k5-fWgEY/viewform?c=0&w=1&usp=mail_form_link";
+										   }
+								}
+						}
+				}
+		});
+>>>>>>> master
 }
 
 function changeModule(ModuleAddress)
@@ -347,7 +620,12 @@ function parseLevle(d)
 	var ModuleLevel = {}			
 
 	ModuleLevel.Level = +d.Level;
+<<<<<<< HEAD
 	ModuleLevel.ReNumber = +d.RequiredNo;
+=======
+	ModuleLevel.ReBlueNumber = +d.BlueRequiredNo;
+	ModuleLevel.ReGreenNumber = +d.GreenRequiredNo;
+>>>>>>> master
 	ModuleLevel.Des = d.Description;
 			
 	return ModuleLevel;
