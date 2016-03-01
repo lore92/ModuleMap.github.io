@@ -196,34 +196,7 @@ function dataLoaded(err,module,Level)
 			
 // Describe the Tooltip part------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 			var ToolTip = d3.select("#Tooltip")
-//			console.log(this);
-			// var LeftPosition = this.style.marginLeft.toString();
-			// var TopPosition = this.style.marginTop.toString();
-			// var pattern = "px";
-			
-			// LeftPosition = LeftPosition.replace(new RegExp(pattern),"");
-			// TopPosition = TopPosition.replace(new RegExp(pattern),"");
-			
-			ToolTip = d3.select("#Tooltip")
-			// .transition()
-			// .duration(500)			
-			.style("margin-left",function(){
-				var coordinates = [0, 0];
-				coordinates = d3.mouse(this);
-				var x = coordinates[0];				
-				return x+buttonWidth/2 + "px";
-				// var RightLeftPosition = +LeftPosition;
-				// console.log(RightLeftPosition);
-				// return  RightLeftPosition + buttonWidth + "px" ;
-			})
-			.style("margin-top",function(){
-				var coordinates = [0, 0];
-				coordinates = d3.mouse(this);
-				var y = coordinates[1];				
-				return y - buttonHeight/2 + "px";
-				// var RightTopPosition = +TopPosition;
-				// return RightTopPosition  + "px" ;				
-			})
+
 			.style("opacity",0.8)
 			
 			var HideText = d3.selectAll("text")
@@ -239,7 +212,7 @@ function dataLoaded(err,module,Level)
 								{
 									BlueNumber = 0;
 								}
-							TipString = "You need to submit " +  BlueNumber + ",more Blue module,in column " + (LevelNumber) + ",to unlock,the next column";
+							TipString = "You need to submit," +  BlueNumber + " blue module in column " + (LevelNumber) + ",to unlock the next column";
 						}
 					else
 						{
@@ -248,7 +221,7 @@ function dataLoaded(err,module,Level)
 								{
 									BlueNumber = 0;
 								}
-							TipString = "You need to submit " + BlueNumber + ",more Blue module,in column " + (LevelNumber) + ",to unlock,the next column";
+							TipString = "You need to submit," + BlueNumber + " blue module in column " + (LevelNumber) + ",to unlock the next column";
 						}					
 				}
 			else
@@ -260,7 +233,7 @@ function dataLoaded(err,module,Level)
 								{
 									GreenNumber = 0;
 								}
-							TipString = "You need to submit at least" + GreenNumber + ",more Green module,in column " + (LevelNumber) + ",to unlock,the next column";
+							TipString = "You need to submit at least," + GreenNumber + " green module in column " + (LevelNumber) + ",to unlock the next column";
 						}
 					else
 						{
@@ -269,7 +242,7 @@ function dataLoaded(err,module,Level)
 								{
 									GreenNumber = 0;
 								}							
-							TipString = "You need submit at least" + GreenNumber + ",more Green module,to unlock,in column " + (LevelNumber) + ",to unlock,the next column";
+							TipString = "You need submit at least," + GreenNumber + " green module in column" + (LevelNumber) + ",to unlock the next column";
 						}	
 				}
 			
@@ -277,7 +250,8 @@ function dataLoaded(err,module,Level)
 			.append("text")
 			.attr("x",15)
 			.attr("y",25)
-			.style("font-size",12+"px")
+			.attr('class', 'ToolTipText')
+			// .style("font-size",14+"px")
 //			.text(TipString);
 			
 			var NewString = TipString.split(",");
@@ -296,7 +270,7 @@ function dataLoaded(err,module,Level)
 		})
 		.on("mouseout",function(){
 
-			var TipStringII = "You need to submit " +  BlueNumber + ",more Blue module" + ",and need to submit " + GreenNumber + ",more Green module,in square "+ (LevelNumber) + ",to unlock,the next column";
+			var TipStringII = "You need to submit," +  BlueNumber + " blue module" + "and need to submit," + GreenNumber + " green module in column "+ (LevelNumber) + ",to unlock the next column";
 			var NewString = TipStringII.split(",");
 			
 //			var Hide = d3.select("#Tooltip")
@@ -311,7 +285,7 @@ function dataLoaded(err,module,Level)
 			.append("text")
 			.attr("x",15)
 			.attr("y",25)
-			.style("font-size",12+"px")
+			.attr('class', 'ToolTipText')
 			
 			Showagain.selectAll("tspan")
 			.data(NewString)

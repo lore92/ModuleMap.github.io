@@ -4,6 +4,11 @@ html,body,div,ul,li,svg{
 	list-style:none;
 }
 
+.ToolTipText{
+	font-size: 20px;
+	line-height: 20px;
+
+}
 /*------------Global-------------*/
 html,body{
 	height: 100%;

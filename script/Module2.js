@@ -196,35 +196,17 @@ function dataLoaded(err,module,Level)
 			
 // Describe the Tooltip part------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 			var ToolTip = d3.select("#Tooltip")
-//			console.log(this);
-			// var LeftPosition = this.style.marginLeft.toString();
-			// var TopPosition = this.style.marginTop.toString();
-			// var pattern = "px";
-			
-			// LeftPosition = LeftPosition.replace(new RegExp(pattern),"");
-			// TopPosition = TopPosition.replace(new RegExp(pattern),"");
-			
-			ToolTip = d3.select("#Tooltip")
-			// .transition()
-			// .duration(500)			
-			.style("margin-left",function(){
-				var coordinates = [0, 0];
-				coordinates = d3.mouse(this);
-				var x = coordinates[0];				
-				return x+buttonWidth/2 + "px";
-				// var RightLeftPosition = +LeftPosition;
-				// console.log(RightLeftPosition);
-				// return  RightLeftPosition + buttonWidth + "px" ;
-			})
-			.style("margin-top",function(){
-				var coordinates = [0, 0];
-				coordinates = d3.mouse(this);
-				var y = coordinates[1];				
-				return y - buttonHeight/2 + "px";
-				// var RightTopPosition = +TopPosition;
-				// return RightTopPosition  + "px" ;				
-			})
-			.style("opacity",0.8)
+
+				.style('visibility','visible')
+				ToolTip
+
+				var xy = d3.mouse(document.getElementById(this.id).getAttribute('required'));
+				var left = xy[0], top = xy[1];
+				d3.select('#ToolTip')
+				.style('left', left + 40 + 'px')
+				.style('top', top - 50 + 'px');
+
+
 			
 			var HideText = d3.selectAll("text")
 			.text("");
